@@ -6,7 +6,7 @@ import ffmpeg
 import random
 import tkinter
 from datetime import datetime
-from tkinter.filedialog import askopenfilename
+from tkinter.filedialog import askopenfilenames
 
 # make list to hold filenames
 list_files = []
@@ -16,17 +16,18 @@ root.withdraw()
 print("evan's squobbler 2025: stitch a bunch of audio files together in a random sequence")
 
 while True:
-    print("Type 1 to add sample to squobbler. Type 2 to render and export as wav")
+    print("Type 1 to add sample(s) to squobbler. Type 2 to render and export as wav")
     user_sel = input("Select: ")
 
     if user_sel == "1":
         # open file selector dialog
         root.attributes("-topmost", True)
-        str_filename = askopenfilename(parent=root, filetypes=[("Audio files", ".mp3 .wav .flac .aac .ogg .aiff .aif")])
+        filenames = askopenfilenames(parent=root, filetypes=[("Audio files", ".mp3 .wav .flac .aac .ogg .aiff .aif")])
 
         # add to file list
-        list_files.append(str_filename)
-        print(str_filename + " added")
+        for item in filenames:
+            list_files.append(str(item))
+        print(str(filenames) + " added")
 
     elif user_sel == "2":
         if not list_files:
